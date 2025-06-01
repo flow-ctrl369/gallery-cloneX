@@ -14,10 +14,7 @@ export default function GalleryPage() {
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto mb-16">
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 uppercase tracking-wider relative inline-block">
-            Gallery Collection
-            <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-accent" />
-          </h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">Gallery Collection</h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Discover our carefully curated selection of contemporary and classical artwork from emerging and established artists worldwide.
           </p>

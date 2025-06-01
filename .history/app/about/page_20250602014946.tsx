@@ -10,10 +10,7 @@ export default function AboutPage() {
     <main className="min-h-screen py-16 px-4 md:px-8">
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto mb-16 text-center">
-        <h1 className="text-4xl md:text-6xl font-bold mb-6 uppercase tracking-wider relative inline-block">
-          About Our Gallery
-          <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-accent" />
-        </h1>
+        <h1 className="text-4xl md:text-6xl font-bold mb-6">About Our Gallery</h1>
         <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
           Dedicated to showcasing exceptional contemporary art and supporting emerging and established artists.
         </p>
@@ -23,10 +20,7 @@ export default function AboutPage() {
       <section className="max-w-7xl mx-auto mb-16">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="text-3xl font-bold mb-6 uppercase tracking-wider relative inline-block">
-              Our Story
-              <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-accent" />
-            </h2>
+            <h2 className="text-3xl font-bold mb-6">Our Story</h2>
             <p className="text-muted-foreground mb-4">
               Founded in 2015, Abstra began as a visionary space dedicated to showcasing contemporary art that challenges conventional perspectives. Over the years, we've grown into a premier destination for emerging and established artists, creating a dynamic platform for artistic expression.
             </p>
@@ -51,10 +45,7 @@ export default function AboutPage() {
 
       {/* Our Team */}
       <section className="max-w-7xl mx-auto mb-16">
-        <h2 className="text-3xl font-bold mb-8 text-center uppercase tracking-wider relative inline-block">
-          Meet Our Team
-          <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-accent" />
-        </h2>
+        <h2 className="text-3xl font-bold mb-8 text-center">Meet Our Team</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {teamMembers.map((member, index) => (
             <Card key={member.id} className="overflow-hidden">
@@ -222,10 +213,7 @@ export default function AboutPage() {
 
       {/* Contact Form */}
       <section className="max-w-3xl mx-auto mb-16">
-        <h2 className="text-3xl font-bold mb-8 text-center uppercase tracking-wider relative inline-block">
-          Get in Touch
-          <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-accent" />
-        </h2>
+        <h2 className="text-3xl font-bold mb-8 text-center">Get in Touch</h2>
         <div className="bg-muted rounded-lg p-6">
           <form className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

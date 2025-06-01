@@ -14,10 +14,7 @@ export default function GalleryPage() {
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto mb-16">
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 uppercase tracking-wider relative inline-block">
-            Gallery Collection
-            <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-accent" />
-          </h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">Gallery Collection</h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Discover our carefully curated selection of contemporary and classical artwork from emerging and established artists worldwide.
           </p>
@@ -34,35 +31,35 @@ export default function GalleryPage() {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
+          <Tabs defaultValue="all" className="w-full md:w-auto">
+            <TabsList className="h-11">
+              <TabsTrigger value="all">All Works</TabsTrigger>
+              <TabsTrigger value="paintings">Paintings</TabsTrigger>
+              <TabsTrigger value="sculptures">Sculptures</TabsTrigger>
+              <TabsTrigger value="photography">Photography</TabsTrigger>
+              <TabsTrigger value="digital">Digital</TabsTrigger>
+            </TabsList>
+          </Tabs>
         </div>
       </section>
 
       {/* Gallery Section */}
       <section className="max-w-7xl mx-auto">
-        <Tabs defaultValue="all" className="w-full">
-          <TabsList className="h-11 mb-8">
-            <TabsTrigger value="all">All Works</TabsTrigger>
-            <TabsTrigger value="paintings">Paintings</TabsTrigger>
-            <TabsTrigger value="sculptures">Sculptures</TabsTrigger>
-            <TabsTrigger value="photography">Photography</TabsTrigger>
-            <TabsTrigger value="digital">Digital</TabsTrigger>
-          </TabsList>
-          <TabsContent value="all">
-            <ArtworkGrid searchQuery={searchQuery} />
-          </TabsContent>
-          <TabsContent value="paintings">
-            <ArtworkGrid category="paintings" searchQuery={searchQuery} />
-          </TabsContent>
-          <TabsContent value="sculptures">
-            <ArtworkGrid category="sculptures" searchQuery={searchQuery} />
-          </TabsContent>
-          <TabsContent value="photography">
-            <ArtworkGrid category="photography" searchQuery={searchQuery} />
-          </TabsContent>
-          <TabsContent value="digital">
-            <ArtworkGrid category="digital" searchQuery={searchQuery} />
-          </TabsContent>
-        </Tabs>
+        <TabsContent value="all">
+          <ArtworkGrid searchQuery={searchQuery} />
+        </TabsContent>
+        <TabsContent value="paintings">
+          <ArtworkGrid category="paintings" searchQuery={searchQuery} />
+        </TabsContent>
+        <TabsContent value="sculptures">
+          <ArtworkGrid category="sculptures" searchQuery={searchQuery} />
+        </TabsContent>
+        <TabsContent value="photography">
+          <ArtworkGrid category="photography" searchQuery={searchQuery} />
+        </TabsContent>
+        <TabsContent value="digital">
+          <ArtworkGrid category="digital" searchQuery={searchQuery} />
+        </TabsContent>
       </section>
     </main>
   )

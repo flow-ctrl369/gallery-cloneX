@@ -1,5 +1,4 @@
 import Link from "next/link"
-import Logo from "@/components/logo"
 
 export default function Footer() {
   return (
@@ -7,7 +6,9 @@ export default function Footer() {
       <div className="container py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-2">
-            <Logo variant="minimal" className="mb-4" />
+            <Link href="/" className="text-xl font-bold mb-4 inline-block">
+              Abstra
+            </Link>
             <p className="text-muted-foreground mb-4 max-w-md">
               Discover extraordinary works from emerging and established artists at Abstra, your premier destination for contemporary art.
             </p>

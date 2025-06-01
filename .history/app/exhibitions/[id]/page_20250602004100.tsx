@@ -40,10 +40,7 @@ export default function ExhibitionPage({ params }: { params: { id: string } }) {
 
         <div className="space-y-6">
           <div>
-            <h1 className="text-4xl font-bold mb-4 uppercase tracking-wider relative inline-block">
-              {exhibition.title}
-              <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-accent" />
-            </h1>
+            <h1 className="text-4xl font-bold mb-4">{exhibition.title}</h1>
             <p className="text-muted-foreground text-lg">{exhibition.description}</p>
           </div>
 
@@ -77,10 +74,7 @@ export default function ExhibitionPage({ params }: { params: { id: string } }) {
           </div>
 
           <div className="pt-4">
-            <h2 className="text-2xl font-bold mb-4 uppercase tracking-wider relative inline-block">
-              Featured Artists
-              <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-accent" />
-            </h2>
+            <h2 className="text-2xl font-bold mb-4">Featured Artists</h2>
             <div className="grid grid-cols-2 gap-4">
               {exhibition.featuredArtists.map((artist, index) => (
                 <Card key={index}>
@@ -99,10 +93,7 @@ export default function ExhibitionPage({ params }: { params: { id: string } }) {
       </div>
 
       <div className="mt-12">
-        <h2 className="text-2xl font-bold mb-6 uppercase tracking-wider relative inline-block">
-          About the Exhibition
-          <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-accent" />
-        </h2>
+        <h2 className="text-2xl font-bold mb-6">About the Exhibition</h2>
         <div className="prose prose-lg max-w-none">
           <p>
             This exhibition brings together a diverse collection of works that explore the theme of

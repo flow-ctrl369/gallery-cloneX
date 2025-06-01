@@ -34,8 +34,9 @@ export default function Home() {
         <section className="py-16 px-4 md:px-8 bg-muted relative overflow-hidden">
           <ArtistCarousel />
           <div className="max-w-7xl mx-auto text-center relative z-10">
-            <h2 className="text-3xl font-bold mb-4 uppercase tracking-wider">
+            <h2 className="text-3xl font-bold mb-4 uppercase tracking-wider relative inline-block">
               Meet Our Artists
+              <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-accent" />
             </h2>
             <p className="text-lg mb-8 max-w-2xl mx-auto text-muted-foreground">
               Discover the talented creators behind our extraordinary collection of artwork from around the world.

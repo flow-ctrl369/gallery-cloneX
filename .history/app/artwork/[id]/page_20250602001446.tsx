@@ -46,10 +46,7 @@ export default function ArtworkPage({ params }: ArtworkPageProps) {
         <div>
           <div className="flex justify-between items-start">
             <div>
-              <h1 className="text-3xl font-bold mb-2 uppercase tracking-wider relative inline-block">
-                {artwork.title}
-                <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-accent" />
-              </h1>
+              <h1 className="text-3xl font-bold mb-2">{artwork.title}</h1>
               <p className="text-xl mb-4">{artwork.artist}</p>
               <div className="inline-block bg-muted px-3 py-1 rounded-full text-sm mb-6">{artwork.category}</div>
             </div>
@@ -66,10 +63,7 @@ export default function ArtworkPage({ params }: ArtworkPageProps) {
           </div>
 
           <div className="mb-6">
-            <h2 className="font-semibold mb-2 uppercase tracking-wider relative inline-block">
-              Description
-              <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-accent" />
-            </h2>
+            <h2 className="font-semibold mb-2">Description</h2>
             <p className="text-muted-foreground">{artwork.description}</p>
           </div>
 
@@ -120,10 +114,7 @@ export default function ArtworkPage({ params }: ArtworkPageProps) {
       </div>
 
       <section className="mb-16">
-        <h2 className="text-2xl font-bold mb-8 uppercase tracking-wider relative inline-block">
-          Related Artworks
-          <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-accent" />
-        </h2>
+        <h2 className="text-2xl font-bold mb-8">Related Artworks</h2>
         <RelatedArtworks currentId={id} category={artwork.category} />
       </section>
     </main>

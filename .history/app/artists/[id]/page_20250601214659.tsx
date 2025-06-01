@@ -53,18 +53,12 @@ export default function ArtistPage({ params }: { params: { id: string } }) {
         </div>
 
         <div className="md:col-span-2">
-          <h1 className="text-3xl font-bold mb-2 uppercase tracking-wider relative inline-block">
-            {artist.name}
-            <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-accent" />
-          </h1>
+          <h1 className="text-3xl font-bold mb-2">{artist.name}</h1>
           <p className="text-xl mb-4">{artist.specialty}</p>
           <div className="inline-block bg-muted px-3 py-1 rounded-full text-sm mb-6">{artist.location}</div>
 
           <div className="mb-6">
-            <h2 className="font-semibold mb-2 uppercase tracking-wider relative inline-block">
-              Biography
-              <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-accent" />
-            </h2>
+            <h2 className="font-semibold mb-2">Biography</h2>
             <p className="text-muted-foreground whitespace-pre-line">{artist.biography}</p>
           </div>
 
@@ -92,18 +86,12 @@ export default function ArtistPage({ params }: { params: { id: string } }) {
       </div>
 
       <section className="mb-16">
-        <h2 className="text-2xl font-bold mb-8 uppercase tracking-wider relative inline-block">
-          Artworks by {artist.name}
-          <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-accent" />
-        </h2>
+        <h2 className="text-2xl font-bold mb-8">Artworks by {artist.name}</h2>
         <ArtworkGrid artistId={artist.id} />
       </section>
 
       <section className="mb-16">
-        <h2 className="text-2xl font-bold mb-4 uppercase tracking-wider relative inline-block">
-          Exhibitions
-          <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-accent" />
-        </h2>
+        <h2 className="text-2xl font-bold mb-4">Exhibitions</h2>
         <ul className="space-y-4">
           {artist.exhibitions.map((exhibition, index) => (
             <li key={index} className="border-b pb-4">

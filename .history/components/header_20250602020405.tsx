@@ -11,7 +11,7 @@ export default function Header() {
       <div className="container flex h-16 items-center">
         <Logo className="mr-6" />
         <div className="flex flex-1 items-center justify-end">
-          <nav className="hidden md:flex items-center gap-8 text-sm mr-6">
+          <nav className="hidden md:flex items-center gap-6 text-sm mr-6">
             <Link href="/" className="transition-colors hover:text-foreground/80">
               Home
             </Link>
