@@ -38,7 +38,7 @@ export default function AboutPage() {
           </div>
           <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
             <Image
-              src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?q=80&w=1200"
+              src="/placeholder.svg?height=800&width=1200"
               alt="Gallery interior"
               fill
               className="object-cover"
@@ -52,20 +52,11 @@ export default function AboutPage() {
       <section className="max-w-7xl mx-auto mb-16">
         <h2 className="text-3xl font-bold mb-8 text-center">Meet Our Team</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {teamMembers.map((member, index) => (
+          {teamMembers.map((member) => (
             <Card key={member.id} className="overflow-hidden">
               <div className="aspect-square relative">
                 <Image
-                  src={[
-                    "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=800",
-                    "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800",
-                    "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=800",
-                    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800",
-                    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=800",
-                    "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=800",
-                    "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=800",
-                    "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800"
-                  ][index]}
+                  src={member.image || "/placeholder.svg"}
                   alt={member.name}
                   fill
                   className="object-cover"
@@ -126,7 +117,7 @@ export default function AboutPage() {
               </div>
               <div className="relative aspect-square md:aspect-auto md:h-full overflow-hidden rounded-lg">
                 <Image
-                  src="https://images.unsplash.com/photo-1579783901586-d88db74b4fe4?q=80&w=800"
+                  src="/placeholder.svg?height=600&width=600"
                   alt="Gallery map"
                   fill
                   className="object-cover"
