@@ -1,0 +1,74 @@
+export const exhibitions = [
+  {
+    id: 1,
+    title: "Modern Perspectives",
+    description: "A contemporary exploration of urban landscapes through the lens of emerging photographers.",
+    startDate: "2024-03-15",
+    endDate: "2024-04-15",
+    location: "Main Gallery",
+    image: "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?q=80&w=1000",
+    curator: "Sarah Chen",
+    featuredArtists: ["Alex Rivera", "Maya Patel", "James Wilson"],
+    status: "upcoming"
+  },
+  {
+    id: 2,
+    title: "Abstract Realities",
+    description: "An immersive journey through abstract art that challenges conventional perspectives.",
+    startDate: "2024-02-01",
+    endDate: "2024-03-01",
+    location: "East Wing",
+    image: "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?q=80&w=1000",
+    curator: "David Kim",
+    featuredArtists: ["Emma Thompson", "Carlos Rodriguez", "Lisa Chang"],
+    status: "current"
+  },
+  {
+    id: 3,
+    title: "Digital Frontiers",
+    description: "Exploring the intersection of technology and art in the digital age.",
+    startDate: "2024-01-10",
+    endDate: "2024-02-10",
+    location: "Digital Gallery",
+    image: "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=1000",
+    curator: "Maria Garcia",
+    featuredArtists: ["Tom Anderson", "Sophie Lee", "Raj Patel"],
+    status: "past"
+  },
+  {
+    id: 4,
+    title: "Nature's Canvas",
+    description: "A celebration of natural beauty through various artistic mediums.",
+    startDate: "2024-04-20",
+    endDate: "2024-05-20",
+    location: "Garden Gallery",
+    image: "https://images.unsplash.com/photo-1579783901586-d88db74b4fe4?q=80&w=1000",
+    curator: "John Smith",
+    featuredArtists: ["Anna White", "Michael Brown", "Yuki Tanaka"],
+    status: "upcoming"
+  },
+  {
+    id: 5,
+    title: "Cultural Fusion",
+    description: "A vibrant showcase of art that bridges different cultural traditions.",
+    startDate: "2024-03-01",
+    endDate: "2024-04-01",
+    location: "International Wing",
+    image: "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?q=80&w=1000",
+    curator: "Fatima Ahmed",
+    featuredArtists: ["Lucas Silva", "Aisha Khan", "Marcus Johnson"],
+    status: "current"
+  },
+  {
+    id: 6,
+    title: "Minimalist Expressions",
+    description: "Exploring the power of simplicity in contemporary art.",
+    startDate: "2023-12-01",
+    endDate: "2024-01-01",
+    location: "West Wing",
+    image: "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?q=80&w=1000",
+    curator: "Peter Wong",
+    featuredArtists: ["Sarah Miller", "Daniel Park", "Olivia Chen"],
+    status: "past"
+  }
+]; 
