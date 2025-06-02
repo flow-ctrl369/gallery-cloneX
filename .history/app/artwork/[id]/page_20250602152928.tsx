@@ -170,33 +170,26 @@ export default function ArtworkPage({ params }: ArtworkPageProps) {
             <div className="flex gap-4">
                 <Dialog>
                   <DialogTrigger asChild>
-                    <Button className="flex-1">Purchase</Button>
+              <Button className="flex-1">Purchase</Button>
                   </DialogTrigger>
-                  <DialogContent className="sm:max-w-[800px] p-0 overflow-hidden">
-                    <DialogHeader className="px-6 py-4 border-b">
-                      <DialogTitle className="text-center">
+                  <DialogContent className="sm:max-w-[800px]">
+                    <DialogHeader>
+                      <DialogTitle>
                         {showPayment ? 'Complete Your Purchase' : 'Purchase Information'}
                       </DialogTitle>
                     </DialogHeader>
                     
                     {!showPayment ? (
-                      <div className="p-6">
-                        <PurchaseInfoForm 
-                          key={showPayment ? 'payment' : 'info'}
-                          artworkTitle={artwork.title}
-                          onComplete={handlePurchaseInfoComplete}
-                          defaultValues={purchaseInfo || undefined}
-                        />
-                      </div>
+                      <PurchaseInfoForm 
+                        artworkTitle={artwork.title}
+                        onComplete={handlePurchaseInfoComplete}
+                      />
                     ) : clientSecret ? (
-                      <div className="grid grid-cols-1 md:grid-cols-2 h-full divide-x divide-border">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
                         {/* Order Summary */}
-                        <div className="p-6 md:p-8 bg-muted dark:bg-gray-800 space-y-6 flex flex-col justify-between">
-                          <div className="space-y-6">
-                            <div>
-                              <h3 className="font-bold mb-4 text-xl">Order Summary</h3>
-                              <p className="text-muted-foreground text-sm">Review your purchase details before proceeding to payment.</p>
-                            </div>
+                        <div className="space-y-6">
+                          <div className="p-0 bg-transparent rounded-none">
+                            <h3 className="font-semibold mb-4 text-lg">Order Summary</h3>
                             <div className="space-y-4 text-sm">
                               <div className="flex justify-between items-center pb-3 border-b">
                                 <span className="text-muted-foreground">Artwork:</span>
@@ -223,18 +216,16 @@ export default function ArtworkPage({ params }: ArtworkPageProps) {
                           <Button
                             variant="outline"
                             onClick={handleBack}
-                            className="w-full mt-8"
+                            className="w-full"
                           >
                             Back to Information
                           </Button>
                         </div>
 
                         {/* Payment Form */}
-                        <div className="p-6 md:p-8 space-y-6 flex flex-col justify-between">
-                          <div>
-                             <h3 className="font-bold mb-4 text-xl">Payment Details</h3>
-                             <p className="text-muted-foreground text-sm">Enter your payment information to complete the purchase</p>
-                          </div>
+                        <div className="space-y-6">
+                          <h3 className="font-semibold mb-4 text-lg">Payment Details</h3>
+                          <p className="text-muted-foreground text-sm">Enter your payment information to complete the purchase</p>
                           <Elements stripe={stripePromise} options={options}>
                             <CheckoutForm 
                               artwork={artwork}
@@ -244,7 +235,7 @@ export default function ArtworkPage({ params }: ArtworkPageProps) {
                         </div>
                       </div>
                     ) : (
-                      <div className="flex items-center justify-center p-6">
+                      <div className="flex items-center justify-center p-4">
                         <Loader2 className="h-6 w-6 animate-spin" />
                       </div>
                     )}

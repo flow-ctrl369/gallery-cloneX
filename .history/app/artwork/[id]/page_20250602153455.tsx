@@ -182,10 +182,8 @@ export default function ArtworkPage({ params }: ArtworkPageProps) {
                     {!showPayment ? (
                       <div className="p-6">
                         <PurchaseInfoForm 
-                          key={showPayment ? 'payment' : 'info'}
                           artworkTitle={artwork.title}
                           onComplete={handlePurchaseInfoComplete}
-                          defaultValues={purchaseInfo || undefined}
                         />
                       </div>
                     ) : clientSecret ? (
@@ -230,7 +228,7 @@ export default function ArtworkPage({ params }: ArtworkPageProps) {
                         </div>
 
                         {/* Payment Form */}
-                        <div className="p-6 md:p-8 space-y-6 flex flex-col justify-between">
+                        <div className="p-6 md:p-8 space-y-6">
                           <div>
                              <h3 className="font-bold mb-4 text-xl">Payment Details</h3>
                              <p className="text-muted-foreground text-sm">Enter your payment information to complete the purchase</p>

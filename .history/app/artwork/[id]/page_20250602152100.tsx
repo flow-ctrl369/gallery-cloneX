@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
-import { ArrowLeft, Heart, Share, Loader2 } from "lucide-react"
+import { ArrowLeft, Heart, Share } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { artworks } from "@/lib/data"
@@ -18,7 +18,6 @@ import PurchaseInfoForm, { PurchaseInfo } from "@/components/purchase-info-form"
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import CheckoutForm from '@/components/checkout-form';
-import { toast, useToast } from "@/components/ui/use-toast"
 
 interface ArtworkPageProps {
   params: Promise<{ id: string }>;
@@ -32,64 +31,15 @@ export default function ArtworkPage({ params }: ArtworkPageProps) {
   const artwork = artworks.find((artwork) => artwork.id === id);
   const [showPayment, setShowPayment] = useState(false);
   const [purchaseInfo, setPurchaseInfo] = useState<PurchaseInfo | null>(null);
-  const [clientSecret, setClientSecret] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
-  const { toast } = useToast();
 
   if (!artwork) {
     notFound();
   }
 
-  const handlePurchaseInfoComplete = async (info: PurchaseInfo) => {
-    setLoading(true);
-    try {
-      // Create payment intent
-      const response = await fetch('/api/create-payment-intent', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          amount: artwork.price,
-          artworkId: artwork.id,
-          artworkTitle: artwork.title,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to create payment intent');
-      }
-
-      setClientSecret(data.clientSecret);
-      setPurchaseInfo(info);
-      setShowPayment(true);
-    } catch (error) {
-      console.error('Error creating payment intent:', error);
-      toast({
-        title: "Error",
-        description: "Failed to initialize payment. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setLoading(false);
-    }
+  const handlePurchaseInfoComplete = (info: PurchaseInfo) => {
+    setPurchaseInfo(info);
+    setShowPayment(true);
   };
-
-  const handleBack = () => {
-    setShowPayment(false);
-    setClientSecret(null);
-  };
-
-  const appearance = {
-    theme: 'stripe' as const,
-  };
-
-  const options = clientSecret ? {
-    clientSecret,
-    appearance,
-  } : undefined;
 
   return (
     <PageTransition>
@@ -170,83 +120,27 @@ export default function ArtworkPage({ params }: ArtworkPageProps) {
             <div className="flex gap-4">
                 <Dialog>
                   <DialogTrigger asChild>
-                    <Button className="flex-1">Purchase</Button>
+              <Button className="flex-1">Purchase</Button>
                   </DialogTrigger>
-                  <DialogContent className="sm:max-w-[800px] p-0 overflow-hidden">
-                    <DialogHeader className="px-6 py-4 border-b">
-                      <DialogTitle className="text-center">
+                  <DialogContent className="sm:max-w-[425px]">
+                    <DialogHeader>
+                      <DialogTitle>
                         {showPayment ? 'Complete Your Purchase' : 'Purchase Information'}
                       </DialogTitle>
                     </DialogHeader>
                     
                     {!showPayment ? (
-                      <div className="p-6">
-                        <PurchaseInfoForm 
-                          key={showPayment ? 'payment' : 'info'}
-                          artworkTitle={artwork.title}
-                          onComplete={handlePurchaseInfoComplete}
-                          defaultValues={purchaseInfo || undefined}
-                        />
-                      </div>
-                    ) : clientSecret ? (
-                      <div className="grid grid-cols-1 md:grid-cols-2 h-full divide-x divide-border">
-                        {/* Order Summary */}
-                        <div className="p-6 md:p-8 bg-muted dark:bg-gray-800 space-y-6 flex flex-col justify-between">
-                          <div className="space-y-6">
-                            <div>
-                              <h3 className="font-bold mb-4 text-xl">Order Summary</h3>
-                              <p className="text-muted-foreground text-sm">Review your purchase details before proceeding to payment.</p>
-                            </div>
-                            <div className="space-y-4 text-sm">
-                              <div className="flex justify-between items-center pb-3 border-b">
-                                <span className="text-muted-foreground">Artwork:</span>
-                                <span className="font-medium text-right ml-4">{artwork.title}</span>
-                              </div>
-                              <div className="flex justify-between items-center pb-3 border-b">
-                                <span className="text-muted-foreground">Price:</span>
-                                <span className="font-medium text-right ml-4">${artwork.price.toFixed(2)}</span>
-                              </div>
-                              <div className="flex justify-between items-center pb-3 border-b">
-                                <span className="text-muted-foreground">Name:</span>
-                                <span className="font-medium text-right ml-4">{purchaseInfo?.name}</span>
-                              </div>
-                              <div className="flex justify-between items-center pb-3 border-b">
-                                <span className="text-muted-foreground">Email:</span>
-                                <span className="font-medium text-right ml-4">{purchaseInfo?.email}</span>
-                              </div>
-                              <div className="flex justify-between items-start pb-3">
-                                <span className="text-muted-foreground">Delivery Address:</span>
-                                <span className="font-medium text-right ml-4">{purchaseInfo?.address}</span>
-                              </div>
-                            </div>
-                          </div>
-                          <Button
-                            variant="outline"
-                            onClick={handleBack}
-                            className="w-full mt-8"
-                          >
-                            Back to Information
-                          </Button>
-                        </div>
-
-                        {/* Payment Form */}
-                        <div className="p-6 md:p-8 space-y-6 flex flex-col justify-between">
-                          <div>
-                             <h3 className="font-bold mb-4 text-xl">Payment Details</h3>
-                             <p className="text-muted-foreground text-sm">Enter your payment information to complete the purchase</p>
-                          </div>
-                          <Elements stripe={stripePromise} options={options}>
-                            <CheckoutForm 
-                              artwork={artwork}
-                              purchaseInfo={purchaseInfo!}
-                            />
-                          </Elements>
-                        </div>
-                      </div>
+                      <PurchaseInfoForm 
+                        artworkTitle={artwork.title}
+                        onComplete={handlePurchaseInfoComplete}
+                      />
                     ) : (
-                      <div className="flex items-center justify-center p-6">
-                        <Loader2 className="h-6 w-6 animate-spin" />
-                      </div>
+                      <Elements stripe={stripePromise}>
+                        <CheckoutForm 
+                          artwork={artwork}
+                          purchaseInfo={purchaseInfo!}
+                        />
+                      </Elements>
                     )}
                   </DialogContent>
                 </Dialog>

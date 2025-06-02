@@ -182,7 +182,6 @@ export default function ArtworkPage({ params }: ArtworkPageProps) {
                     {!showPayment ? (
                       <div className="p-6">
                         <PurchaseInfoForm 
-                          key={showPayment ? 'payment' : 'info'}
                           artworkTitle={artwork.title}
                           onComplete={handlePurchaseInfoComplete}
                           defaultValues={purchaseInfo || undefined}

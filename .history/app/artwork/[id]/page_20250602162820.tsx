@@ -89,6 +89,8 @@ export default function ArtworkPage({ params }: ArtworkPageProps) {
   const options = clientSecret ? {
     clientSecret,
     appearance,
+    // Disable Link
+    link: { showEmail: false },
   } : undefined;
 
   return (

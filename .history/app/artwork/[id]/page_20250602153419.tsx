@@ -182,42 +182,38 @@ export default function ArtworkPage({ params }: ArtworkPageProps) {
                     {!showPayment ? (
                       <div className="p-6">
                         <PurchaseInfoForm 
-                          key={showPayment ? 'payment' : 'info'}
                           artworkTitle={artwork.title}
                           onComplete={handlePurchaseInfoComplete}
-                          defaultValues={purchaseInfo || undefined}
                         />
                       </div>
                     ) : clientSecret ? (
                       <div className="grid grid-cols-1 md:grid-cols-2 h-full divide-x divide-border">
                         {/* Order Summary */}
-                        <div className="p-6 md:p-8 bg-muted dark:bg-gray-800 space-y-6 flex flex-col justify-between">
-                          <div className="space-y-6">
-                            <div>
-                              <h3 className="font-bold mb-4 text-xl">Order Summary</h3>
-                              <p className="text-muted-foreground text-sm">Review your purchase details before proceeding to payment.</p>
+                        <div className="p-6 md:p-8 bg-muted dark:bg-gray-800 space-y-6">
+                          <div>
+                            <h3 className="font-bold mb-4 text-xl">Order Summary</h3>
+                            <p className="text-muted-foreground text-sm">Review your purchase details before proceeding to payment.</p>
+                          </div>
+                          <div className="space-y-4 text-sm">
+                            <div className="flex justify-between items-center pb-3 border-b">
+                              <span className="text-muted-foreground">Artwork:</span>
+                              <span className="font-medium text-right ml-4">{artwork.title}</span>
                             </div>
-                            <div className="space-y-4 text-sm">
-                              <div className="flex justify-between items-center pb-3 border-b">
-                                <span className="text-muted-foreground">Artwork:</span>
-                                <span className="font-medium text-right ml-4">{artwork.title}</span>
-                              </div>
-                              <div className="flex justify-between items-center pb-3 border-b">
-                                <span className="text-muted-foreground">Price:</span>
-                                <span className="font-medium text-right ml-4">${artwork.price.toFixed(2)}</span>
-                              </div>
-                              <div className="flex justify-between items-center pb-3 border-b">
-                                <span className="text-muted-foreground">Name:</span>
-                                <span className="font-medium text-right ml-4">{purchaseInfo?.name}</span>
-                              </div>
-                              <div className="flex justify-between items-center pb-3 border-b">
-                                <span className="text-muted-foreground">Email:</span>
-                                <span className="font-medium text-right ml-4">{purchaseInfo?.email}</span>
-                              </div>
-                              <div className="flex justify-between items-start pb-3">
-                                <span className="text-muted-foreground">Delivery Address:</span>
-                                <span className="font-medium text-right ml-4">{purchaseInfo?.address}</span>
-                              </div>
+                            <div className="flex justify-between items-center pb-3 border-b">
+                              <span className="text-muted-foreground">Price:</span>
+                              <span className="font-medium text-right ml-4">${artwork.price.toFixed(2)}</span>
+                            </div>
+                            <div className="flex justify-between items-center pb-3 border-b">
+                              <span className="text-muted-foreground">Name:</span>
+                              <span className="font-medium text-right ml-4">{purchaseInfo?.name}</span>
+                            </div>
+                            <div className="flex justify-between items-center pb-3 border-b">
+                              <span className="text-muted-foreground">Email:</span>
+                              <span className="font-medium text-right ml-4">{purchaseInfo?.email}</span>
+                            </div>
+                            <div className="flex justify-between items-start pb-3">
+                              <span className="text-muted-foreground">Delivery Address:</span>
+                              <span className="font-medium text-right ml-4">{purchaseInfo?.address}</span>
                             </div>
                           </div>
                           <Button
@@ -230,11 +226,9 @@ export default function ArtworkPage({ params }: ArtworkPageProps) {
                         </div>
 
                         {/* Payment Form */}
-                        <div className="p-6 md:p-8 space-y-6 flex flex-col justify-between">
-                          <div>
-                             <h3 className="font-bold mb-4 text-xl">Payment Details</h3>
-                             <p className="text-muted-foreground text-sm">Enter your payment information to complete the purchase</p>
-                          </div>
+                        <div className="p-6 md:p-8 space-y-6">
+                          <h3 className="font-bold mb-4 text-xl">Payment Details</h3>
+                          <p className="text-muted-foreground text-sm">Enter your payment information to complete the purchase</p>
                           <Elements stripe={stripePromise} options={options}>
                             <CheckoutForm 
                               artwork={artwork}

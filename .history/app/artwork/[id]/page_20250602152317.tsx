@@ -83,13 +83,13 @@ export default function ArtworkPage({ params }: ArtworkPageProps) {
   };
 
   const appearance = {
-    theme: 'stripe' as const,
+    theme: 'stripe',
   };
 
-  const options = clientSecret ? {
-    clientSecret,
+  const options = {
+    clientSecret: clientSecret || undefined,
     appearance,
-  } : undefined;
+  };
 
   return (
     <PageTransition>
@@ -170,81 +170,50 @@ export default function ArtworkPage({ params }: ArtworkPageProps) {
             <div className="flex gap-4">
                 <Dialog>
                   <DialogTrigger asChild>
-                    <Button className="flex-1">Purchase</Button>
+              <Button className="flex-1">Purchase</Button>
                   </DialogTrigger>
-                  <DialogContent className="sm:max-w-[800px] p-0 overflow-hidden">
-                    <DialogHeader className="px-6 py-4 border-b">
-                      <DialogTitle className="text-center">
+                  <DialogContent className="sm:max-w-[425px]">
+                    <DialogHeader>
+                      <DialogTitle>
                         {showPayment ? 'Complete Your Purchase' : 'Purchase Information'}
                       </DialogTitle>
                     </DialogHeader>
                     
                     {!showPayment ? (
-                      <div className="p-6">
-                        <PurchaseInfoForm 
-                          key={showPayment ? 'payment' : 'info'}
-                          artworkTitle={artwork.title}
-                          onComplete={handlePurchaseInfoComplete}
-                          defaultValues={purchaseInfo || undefined}
-                        />
-                      </div>
+                      <PurchaseInfoForm 
+                        artworkTitle={artwork.title}
+                        onComplete={handlePurchaseInfoComplete}
+                      />
                     ) : clientSecret ? (
-                      <div className="grid grid-cols-1 md:grid-cols-2 h-full divide-x divide-border">
-                        {/* Order Summary */}
-                        <div className="p-6 md:p-8 bg-muted dark:bg-gray-800 space-y-6 flex flex-col justify-between">
-                          <div className="space-y-6">
-                            <div>
-                              <h3 className="font-bold mb-4 text-xl">Order Summary</h3>
-                              <p className="text-muted-foreground text-sm">Review your purchase details before proceeding to payment.</p>
-                            </div>
-                            <div className="space-y-4 text-sm">
-                              <div className="flex justify-between items-center pb-3 border-b">
-                                <span className="text-muted-foreground">Artwork:</span>
-                                <span className="font-medium text-right ml-4">{artwork.title}</span>
-                              </div>
-                              <div className="flex justify-between items-center pb-3 border-b">
-                                <span className="text-muted-foreground">Price:</span>
-                                <span className="font-medium text-right ml-4">${artwork.price.toFixed(2)}</span>
-                              </div>
-                              <div className="flex justify-between items-center pb-3 border-b">
-                                <span className="text-muted-foreground">Name:</span>
-                                <span className="font-medium text-right ml-4">{purchaseInfo?.name}</span>
-                              </div>
-                              <div className="flex justify-between items-center pb-3 border-b">
-                                <span className="text-muted-foreground">Email:</span>
-                                <span className="font-medium text-right ml-4">{purchaseInfo?.email}</span>
-                              </div>
-                              <div className="flex justify-between items-start pb-3">
-                                <span className="text-muted-foreground">Delivery Address:</span>
-                                <span className="font-medium text-right ml-4">{purchaseInfo?.address}</span>
-                              </div>
-                            </div>
+                      <>
+                        <div className="mb-6 p-4 bg-muted rounded-lg">
+                          <h3 className="font-semibold mb-2">Order Summary</h3>
+                          <div className="space-y-2 text-sm">
+                            <p><span className="text-muted-foreground">Artwork:</span> {artwork.title}</p>
+                            <p><span className="text-muted-foreground">Price:</span> ${artwork.price.toFixed(2)}</p>
+                            <p><span className="text-muted-foreground">Name:</span> {purchaseInfo?.name}</p>
+                            <p><span className="text-muted-foreground">Email:</span> {purchaseInfo?.email}</p>
+                            <p><span className="text-muted-foreground">Delivery Address:</span> {purchaseInfo?.address}</p>
                           </div>
+                        </div>
+                        <div className="flex gap-2 mb-4">
                           <Button
                             variant="outline"
                             onClick={handleBack}
-                            className="w-full mt-8"
+                            className="flex-1"
                           >
-                            Back to Information
+                            Back
                           </Button>
                         </div>
-
-                        {/* Payment Form */}
-                        <div className="p-6 md:p-8 space-y-6 flex flex-col justify-between">
-                          <div>
-                             <h3 className="font-bold mb-4 text-xl">Payment Details</h3>
-                             <p className="text-muted-foreground text-sm">Enter your payment information to complete the purchase</p>
-                          </div>
-                          <Elements stripe={stripePromise} options={options}>
-                            <CheckoutForm 
-                              artwork={artwork}
-                              purchaseInfo={purchaseInfo!}
-                            />
-                          </Elements>
-                        </div>
-                      </div>
+                        <Elements stripe={stripePromise} options={options}>
+                          <CheckoutForm 
+                            artwork={artwork}
+                            purchaseInfo={purchaseInfo!}
+                          />
+                        </Elements>
+                      </>
                     ) : (
-                      <div className="flex items-center justify-center p-6">
+                      <div className="flex items-center justify-center p-4">
                         <Loader2 className="h-6 w-6 animate-spin" />
                       </div>
                     )}

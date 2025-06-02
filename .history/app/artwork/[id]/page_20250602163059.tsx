@@ -89,6 +89,8 @@ export default function ArtworkPage({ params }: ArtworkPageProps) {
   const options = clientSecret ? {
     clientSecret,
     appearance,
+    // Explicitly include only card payment method
+    paymentMethodTypes: ['card'],
   } : undefined;
 
   return (
