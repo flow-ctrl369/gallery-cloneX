@@ -1,0 +1,148 @@
+'use client';
+
+import { Button } from "@/components/ui/button"
+import { Separator } from "@/components/ui/separator"
+import { ArrowLeft, Heart, Share } from "lucide-react"
+import Image from "next/image"
+import Link from "next/link"
+import { artworks } from "@/lib/data"
+import RelatedArtworks from "@/components/related-artworks"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { PaymentForm } from "@/components/payment-form"
+import { use } from "react"
+import { notFound } from "next/navigation"
+import PageTransition from "@/components/page-transition"
+import MakeOfferForm from "@/components/make-offer-form"
+
+interface ArtworkPageProps {
+  params: Promise<{ id: string }>;
+}
+
+export default function ArtworkPage({ params }: ArtworkPageProps) {
+  const { id } = use(params);
+  const artwork = artworks.find((artwork) => artwork.id === id);
+
+  if (!artwork) {
+    notFound();
+  }
+
+  return (
+    <PageTransition>
+    <main className="min-h-screen py-8 px-4 md:px-8 max-w-7xl mx-auto">
+      <Link href="/" className="inline-flex items-center gap-2 mb-8 hover:underline">
+        <ArrowLeft className="h-4 w-4" />
+        Back to gallery
+      </Link>
+
+      <div className="grid md:grid-cols-2 gap-8 mb-16">
+        <div className="relative aspect-square overflow-hidden rounded-lg">
+          <Image
+            src={artwork.image || "/placeholder.svg"}
+            alt={artwork.title}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            priority
+          />
+        </div>
+
+          <div>
+          <div className="flex justify-between items-start">
+            <div>
+                <h1 className="text-3xl font-bold mb-2 uppercase tracking-wider relative inline-block">
+                  {artwork.title}
+                  <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-accent" />
+                </h1>
+              <p className="text-xl mb-4">{artwork.artist}</p>
+              <div className="inline-block bg-muted px-3 py-1 rounded-full text-sm mb-6">{artwork.category}</div>
+            </div>
+            <div className="flex gap-2">
+              <Button variant="outline" size="icon">
+                <Heart className="h-5 w-5" />
+                <span className="sr-only">Add to favorites</span>
+              </Button>
+              <Button variant="outline" size="icon">
+                <Share className="h-5 w-5" />
+                <span className="sr-only">Share</span>
+              </Button>
+            </div>
+          </div>
+
+          <div className="mb-6">
+              <h2 className="font-semibold mb-2 uppercase tracking-wider relative inline-block">
+                Description
+                <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-accent" />
+              </h2>
+            <p className="text-muted-foreground">{artwork.description}</p>
+          </div>
+
+          <Separator className="my-6" />
+
+          <div className="grid grid-cols-2 gap-4 mb-6">
+            <div>
+              <h3 className="text-sm text-muted-foreground">Year</h3>
+              <p>{artwork.year}</p>
+            </div>
+            <div>
+              <h3 className="text-sm text-muted-foreground">Dimensions</h3>
+              <p>{artwork.dimensions}</p>
+            </div>
+            <div>
+              <h3 className="text-sm text-muted-foreground">Medium</h3>
+              <p>{artwork.medium}</p>
+            </div>
+            <div>
+              <h3 className="text-sm text-muted-foreground">Location</h3>
+              <p>{artwork.location}</p>
+            </div>
+          </div>
+
+            <div>
+            <div className="flex items-center justify-between mb-4">
+              <div className="text-3xl font-bold">${artwork.price.toLocaleString()}</div>
+              <div className="text-sm text-muted-foreground">{artwork.availability}</div>
+            </div>
+            <div className="flex gap-4">
+                <Dialog>
+                  <DialogTrigger asChild>
+              <Button className="flex-1">Purchase</Button>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Complete Your Purchase</DialogTitle>
+                    </DialogHeader>
+                    <PaymentForm price={artwork.price} artworkId={artwork.id} />
+                  </DialogContent>
+                </Dialog>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button size="lg" className="w-full">
+                    Make an Offer
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[425px]">
+                  <DialogHeader>
+                    <DialogTitle>Make an Offer</DialogTitle>
+                  </DialogHeader>
+                  <MakeOfferForm 
+                    artworkId={artwork.id} 
+                    artworkTitle={artwork.title} 
+                  />
+                </DialogContent>
+              </Dialog>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section className="mb-16">
+          <h2 className="text-2xl font-bold mb-8 uppercase tracking-wider relative inline-block">
+            Related Artworks
+            <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-accent" />
+          </h2>
+          <RelatedArtworks currentId={id} category={artwork.category} />
+      </section>
+    </main>
+    </PageTransition>
+  )
+}

@@ -1,0 +1,28 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Newsletter {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Booking {
+  id            Int      @id @default(autoincrement())
+  exhibitionId  Int
+  name          String
+  email         String
+  quantity      Int
+  totalAmount   Float
+  status        String   @default("pending") // pending, confirmed, cancelled
+  paymentIntent String?  // Stripe payment intent ID
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+} 
